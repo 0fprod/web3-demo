@@ -4,7 +4,7 @@ interface Props {}
 
 export const Log: React.FC = () => {
     const styles: SxProps = {
-        height: '50%',
+        height: '48.5%',
         padding: '1rem',
         backgroundColor: 'rgb(29, 95, 95)',
         color: 'rgb(237, 236, 237)',
