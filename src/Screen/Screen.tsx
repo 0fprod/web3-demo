@@ -1,5 +1,6 @@
-import { Card, Paper, SxProps } from '@mui/material';
+import { Paper, SxProps } from '@mui/material';
 import React from 'react';
+import { Log } from '../Log/Log';
 import { PaperWrapper } from './Screen.styled';
 
 interface Props {
@@ -16,6 +17,6 @@ export const Screen: React.FC<Props> = ({}) => {
         flexDirection: 'column'
     };
     return <PaperWrapper>
-        <Paper variant='outlined' sx={paperStyles}> </Paper>
+        <Paper variant='outlined' sx={paperStyles}> <Log/></Paper>
     </PaperWrapper>
 }
