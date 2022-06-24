@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
-import { Button, Card, SxProps } from "@mui/material"
+import { Button } from "@mui/material"
+import { StyledDisplay } from "./Display.styled";
 
 const StyledButton = styled(Button)`
     background-color: rgb(218, 150, 128);
@@ -11,15 +12,9 @@ const StyledButton = styled(Button)`
     }
 `
 
-export const Display: React.FC = ()=>{
-    const styles:SxProps = {
-        height: '48.5%',
-        padding: '1rem',
-        borderRadius: '0',
-        boxShadow:'none'
-    }
+export const Display: React.FC = () => {
 
-    return <Card sx={styles}>
+    return <StyledDisplay>
         <StyledButton variant="contained">Connect</StyledButton>
-    </Card>
+    </StyledDisplay>
 }
