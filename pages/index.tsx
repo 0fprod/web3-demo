@@ -1,9 +1,12 @@
 import type { NextPage } from 'next'
-import { Screen } from '../src/Screen/Screen'
+import { Screen } from '../src/components/Screen/Screen'
+import { LogProvider } from '../src/context/Log.context'
 
 const Home: NextPage = () => {
   return (
-    <Screen/>
+    <LogProvider>
+      <Screen />
+    </LogProvider>
   )
 }
 
