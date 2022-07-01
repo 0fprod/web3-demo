@@ -13,8 +13,6 @@ const StyledButton = styled(Button)`
 `
 
 export const Display: React.FC = () => {
-
-    return <StyledDisplay>
-        <StyledButton variant="contained">Connect</StyledButton>
+    return <StyledDisplay><StyledButton variant="contained">Connect</StyledButton>
     </StyledDisplay>
 }
