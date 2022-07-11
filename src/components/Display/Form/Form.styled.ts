@@ -11,8 +11,9 @@ export const StyledForm = styled.form`
     font-size: 1.25rem;
 `
 
-export const StyledTextField = styled(TextField)`
-    height: 0.5rem;
+export const StyledTextField = styled.input`
+    height: 2rem;
+    padding: 0.25rem;
 `
 
 
