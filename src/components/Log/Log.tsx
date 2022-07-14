@@ -8,7 +8,9 @@ export const Log: React.FC = () => {
 
     return <StyledLog>
         {
-            logContext && logContext.logs.map(msg => <div key={msg} role="log"> {msg}</div>)
+            logContext && logContext.logs
+                .reverse()
+                .map(msg => <div key={msg} role="log"> {msg}</div>)
         }
     </StyledLog>
 }
