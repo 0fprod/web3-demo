@@ -5,12 +5,16 @@ import { useWeb3React } from "@web3-react/core"
 import { Field } from "./Field/Field"
 import Web3 from "web3";
 import { LogContext } from "../../../context/Log.context";
+import { useCutAddress } from "../../../hooks/useCutAddress";
+import { useTether } from "../../../hooks/useTether";
 
 
 export const Form: React.FC = () => {
   const [balance, setBalance] = useState('')
+  const [totalSupply, setTotalSupply] = useState(0)
   const { active, account, deactivate, library } = useWeb3React<Web3>()
   const logContext = useContext(LogContext)
+  const tether = useTether();
 
   const disconnect = () => {
     deactivate()
@@ -23,48 +27,47 @@ export const Form: React.FC = () => {
       logContext?.setLogs('Requesting balance...')
       const balance = await library.eth.getBalance(account)
       setBalance(toDecimal(balance))
-      logContext?.setLogs('Balance is ' + balance + ' units')
-
     }
   }, [library?.eth])
+
+  const getTotalSupply = useCallback(async () => {
+    if (active && tether) {
+      logContext?.setLogs('Requesting tether max supply...')
+      const supply = await tether.methods.totalSupply().call()
+      setTotalSupply(supply)
+    }
+
+  }, [library?.eth?.Contract])
+
+  useEffect(() => {
+    logContext?.setLogs('Balance is ' + balance + ' units')
+  }, [balance])
+
+  useEffect(() => {
+    logContext?.setLogs('Total tether supply is ' + totalSupply + ' units')
+  }, [totalSupply])
 
   useEffect(() => {
     if (active) {
       getBalance()
+      getTotalSupply()
     }
-  }, [getBalance])
+  }, [getBalance, getTotalSupply])
 
   return <StyledForm>
     <StyledButton onClick={disconnect}> Disconnect </StyledButton>
-    <Field label="Account address">
-      {trimAccountAddress(account)}
+    <Field label="Address">
+      {useCutAddress(account)}
     </Field>
-    <Field label="Account balance">
-      {balance} ETH
+    <Field label="Balance">
+      {balance} &equiv;
     </Field>
-    <Field label="Donate to">
-      <StyledTextField />
-    </Field>
-    <div>
-      <StyledButton> Send </StyledButton>
-    </div>
+    <Field label="USDT Max supply:">
+      {totalSupply} </Field>
   </StyledForm>
 }
 
-type Address = string | null | undefined;
 
-function trimAccountAddress(address: Address): string {
-  if (!address) return '';
-
-  const start = address.substring(0, 6);
-  const end = address
-    .split('')
-    .reverse()
-    .join('')
-    .substring(0, 4)
-
-  return `${start}...${end}`
-}
 
 function toDecimal(balance: string) {
   return (+balance / 1e18).toFixed(4)
