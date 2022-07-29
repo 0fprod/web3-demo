@@ -13,7 +13,7 @@ export const Display: React.FC = () => {
 	const connect = useCallback(() => {
 		activate(connector)
 		localStorage.setItem('wasConnected', 'true')
-		logContext?.setLogs('Connected')
+		logContext?.setLogs('Connecting...')
 
 	}, [activate])
 
@@ -23,6 +23,12 @@ export const Display: React.FC = () => {
 			connect()
 		}
 	}, [connect])
+
+	useEffect(() => {
+		if (active) {
+			logContext?.setLogs('Connected')
+		}
+	}, [active])
 
 	return <StyledDisplay>
 		{
