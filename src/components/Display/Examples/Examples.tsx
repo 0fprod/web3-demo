@@ -1,4 +1,4 @@
-import { StyledForm, StyledTextField } from "./Form.styled"
+import { StyledForm, StyledTextField } from "./Examples.styled"
 import { useCallback, useContext, useEffect, useState } from "react";
 import { StyledButton } from "../Display.styled"
 import { useWeb3React } from "@web3-react/core"
@@ -9,7 +9,7 @@ import { useCutAddress } from "../../../hooks/useCutAddress";
 import { useTether } from "../../../hooks/useTether";
 
 
-export const Form: React.FC = () => {
+export const Examples: React.FC = () => {
   const [balance, setBalance] = useState('')
   const [totalSupply, setTotalSupply] = useState(0)
   const { active, account, deactivate, library } = useWeb3React<Web3>()

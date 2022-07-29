@@ -1,6 +1,6 @@
 import { UnsupportedChainIdError, useWeb3React, Web3ReactProvider } from "@web3-react/core";
 import { StyledButton, StyledDisplay } from "./Display.styled";
-import { Form } from './Form/Form'
+import { Examples } from './Examples/Examples'
 import { connector } from '../../config/web3'
 import { useCallback, useContext, useEffect } from "react";
 import { LogContext } from "../../context/Log.context";
@@ -26,7 +26,7 @@ export const Display: React.FC = () => {
 
 	return <StyledDisplay>
 		{
-			active ? <Form /> :
+			active ? <Examples /> :
 				<StyledButton variant="contained" onClick={connect} disabled={isUnsupportedChain}>
 					{isUnsupportedChain ? 'Unsupported network' : 'Connect'}
 				</StyledButton>
